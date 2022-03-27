@@ -8,14 +8,15 @@
     "dev": "nodemon index.js",
     "test": "echo \\\"Error: no test specified\\\" && exit 1"
   },
-  "repository": { 
+  "repository": {
     "type": "git",
     "url": "D:\\Users\\agraw\\Documents\\GitHub\\part3"
   },
   "author": "Pulkit Agrawal",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
