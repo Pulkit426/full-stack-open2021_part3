@@ -21,11 +21,11 @@ app.get('/api/persons',(request,response) => {
 })
 
 app.get('/api/info', (request,response) => {
-    const length = Person.find({}).then(result => result.length)
+    Person.find({}).then(result => {
     const currDate= new Date()
-    response.send(`Phonebook has info for ${length} people <br/> ${currDate}`)
-
-})
+    response.send(`Phonebook has info for ${result.length} people <br/> ${currDate}`)
+ })
+ })
  
 app.get('/api/persons/:id', (request,response) => {
     Person.findById(request.params.id).then(result => response.json(result))
