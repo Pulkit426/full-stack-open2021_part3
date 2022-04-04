@@ -21,7 +21,7 @@ app.get('/api/persons',(request,response) => {
 })
 
 app.get('/api/info', (request,response) => {
-    const length = Person.find({}).length
+    const length = Person.find({}).then(result => result.length)
     const currDate= new Date()
     response.send(`Phonebook has info for ${length} people <br/> ${currDate}`)
 
@@ -52,11 +52,10 @@ app.post('/api/persons', (request,response) => {
    }
 
 
-   const newPerson = {
-       "id": generateId(),
-       "name": body.name,
-       "number": body.number 
-   }
+   const newPerson = new Person({
+       name : body.name,
+       number: body.number 
+   })
 
    newPerson.save().then(savedPerson => response.json(savedPerson))
 
