@@ -45,33 +45,15 @@ app.delete('/api/persons/:id', (request,response,next) => {
 })
 
 app.put('/api/persons/:id', (request,response,next) => {
-    const body= request.body
+    const {name,number}= request.body
 
-    const newPerson = {
-        name: body.name,
-        number: body.number
-    }
-
-
-    Person.findByIdAndUpdate(request.params.id, newPerson, {new: true})
+    Person.findByIdAndUpdate(request.params.id, {name,number}, {new: true, runValidators:true, context: 'query'})
           .then(result => response.json(result))
           .catch(error => next(error))
 })
 
-
-const generateId = () => {
-    return Math.floor(Math.random()*(3435973))
-}
-
 app.post('/api/persons', (request,response,next) => {
    const body= request.body 
-
-//    if(!body.name || !body.number){
-//        return response.status(400).json({
-//            "error": "Please fill complete info"
-//        }) 
-//    }
-
 
    const newPerson = new Person({
        name : body.name,
