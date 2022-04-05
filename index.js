@@ -15,7 +15,7 @@ app.use(morgan(':method :url :status :res[content-length] - :response-time ms :b
 
 
 
-app.get('/api/persons',(request,response,next) => {
+app.get('/api/persons',(request,response) => {
     Person.find({})
           .then(result => response.json(result))
 })
@@ -27,7 +27,7 @@ app.get('/api/info', (request,response) => {
  })
  })
  
-app.get('/api/persons/:id', (request,response) => {
+app.get('/api/persons/:id', (request,response,next) => {
     Person.findById(request.params.id)
           .then(result => {
                 if(result) 
