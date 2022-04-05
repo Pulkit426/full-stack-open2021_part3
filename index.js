@@ -44,6 +44,21 @@ app.delete('/api/persons/:id', (request,response,next) => {
         .catch(error => next(error))
 })
 
+app.put('/api/persons/:id', (request,response,next) => {
+    const body= request.body
+
+    const newPerson = {
+        name: body.name,
+        number: body.number
+    }
+
+
+    Person.findByIdAndUpdate(request.params.id, newPerson, {new: true})
+          .then(result => response.json(result))
+          .catch(error => next(error))
+})
+
+
 const generateId = () => {
     return Math.floor(Math.random()*(3435973))
 }
